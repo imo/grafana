@@ -21,6 +21,7 @@
 							<li role="menuitem"><a tabindex="1" ng-click="hideQuery()" ng-show="target.rawQuery">Query editor mode</a></li>
 							<li role="menuitem"><a tabindex="1" ng-click="moveMetricQuery($index, $index-1)">Move up </a></li>
 							<li role="menuitem"><a tabindex="1" ng-click="moveMetricQuery($index, $index+1)">Move down</a></li>
+							<li role="menuitem"><a tabindex="1" ng-click="continuousQuery()" config-modal="app/partials/influxdb/makeContinuousQuery.html">Make continuous query</a></li>
 						</ul>
 					</li>
 					<li>
