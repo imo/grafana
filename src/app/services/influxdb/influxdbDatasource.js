@@ -54,7 +54,7 @@ function (angular, _, kbn, InfluxSeries, InfluxQueryBuilder) {
           column: target.column,
           func: target.function,
           interval: target.interval,
-          group_dot: target.groupby_field ? ', ' : '',
+          group_dot: target.groupby_field ? '.' : '',
           group: target.groupby_field ? target.groupby_field : '',
           retentionPolicy: 'store90d',
         };
@@ -99,7 +99,7 @@ function (angular, _, kbn, InfluxSeries, InfluxQueryBuilder) {
       });
     };
 
-    InfluxDatasource.prototype.continuousQuery = function(target, withInto) {
+    InfluxDatasource.prototype.continuousQuery = function(target) {
       var query;
 
       if (target.hide || !((target.series && target.column) || target.query) || !target.cq_name) {
@@ -111,18 +111,13 @@ function (angular, _, kbn, InfluxSeries, InfluxQueryBuilder) {
         query = query.replace(";", "");
         var queryElements = query.split(" ");
 
-        if (withInto) {
-          queryElements.push("into");
-          queryElements.push(target.cq_name);
-        }
-
         query = queryElements.join(" ");
       }
       else {
 
         var template = "select [[group]][[group_comma]] [[func]]([[column]]) as [[column_desc]] from [[series]] " +
                         "[[condition_add]] [[condition_key]] [[condition_op]] [[condition_value]] " +
-                        "group by time([[interval]])[[group_comma]] [[group]][[into]][[cq_name]]";
+                        "group by time([[interval]])[[group_comma]] [[group]]";
 
         var templateData = {
           series: target.series,
@@ -136,8 +131,6 @@ function (angular, _, kbn, InfluxSeries, InfluxQueryBuilder) {
           condition_value: target.condition_filter ? target.condition_value : '',
           group_comma: target.groupby_field_add && target.groupby_field ? ',' : '',
           group: target.groupby_field_add ? target.groupby_field : '',
-          into: withInto ? ' into ' : '',
-          cq_name: withInto ? target.cq_name : ''
         };
 
         if(!templateData.series.match('^/.*/')) {
@@ -150,7 +143,7 @@ function (angular, _, kbn, InfluxSeries, InfluxQueryBuilder) {
     };
 
     InfluxDatasource.prototype.makeContinuousQuery = function(target) {
-      var query = this.continuousQuery(target, true);
+      var query = target.cq_query + ' into ' + target.cq_name;
       var datasource = this;
       return this.listContinuousQueryNames().then(function(continuousQueryNames) {
         if (continuousQueryNames.indexOf(target.cq_name) !== -1) {
