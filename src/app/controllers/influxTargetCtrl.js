@@ -56,8 +56,9 @@ function (angular) {
     $scope.continuousQuery = function () {
       $scope.target.cq_name = $scope.datasource.continuousQueryName($scope.target);
       $scope.$watch('target.cq_name', function () {
-        $scope.target.cq_query = $scope.datasource.continuousQuery($scope.target, false);
+        $scope.target.cq_query = $scope.datasource.continuousQuery($scope.target);
       });
+      $scope.$watch('target.cq_query', function () {});
     };
 
     $scope.makeContinuousQuery = function () {
