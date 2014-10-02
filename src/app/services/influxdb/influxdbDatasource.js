@@ -129,8 +129,8 @@ function (angular, _, kbn, InfluxSeries, InfluxQueryBuilder) {
           condition_key: target.condition_filter ? target.condition_key : '',
           condition_op: target.condition_filter ? target.condition_op : '',
           condition_value: target.condition_filter ? target.condition_value : '',
-          group_comma: target.groupby_field_add && target.groupby_field ? ',' : '',
-          group: target.groupby_field_add ? target.groupby_field : '',
+          group_comma: target.groupby_field ? ',' : '',
+          group: target.groupby_field ? target.groupby_field : '',
         };
 
         if(!templateData.series.match('^/.*/')) {
