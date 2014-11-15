@@ -207,7 +207,7 @@ function (angular, _, kbn, InfluxSeries, InfluxQueryBuilder) {
     };
 
     InfluxDatasource.prototype.listContinuousQueryNames = function() {
-      return this._seriesQuery('list series like /^cq\\./').then(function(data) {
+      return this._seriesQuery('list series /^cq\\./').then(function(data) {
         if (!data || data.length === 0) {
           return [];
         }
