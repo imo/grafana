@@ -306,7 +306,7 @@ function (angular, _, dateMath) {
       return { target: metricLabel, datapoints: dps };
     }
 
-    carrier_code_2_name = {
+    var carrierNames = {
         '35230': 'Digicel gd',
         '53001': 'Vodafone nz regs 58',
         '24028': 'CoolTEL Aps se',
@@ -2199,20 +2199,20 @@ function (angular, _, dateMath) {
         '28201': 'Geocell Ltd. ge regs 136',
         '338110': 'Cable & Wireless jm',
         '28202': 'Magti GSM Ltd. ge regs 113',
-    }
+    };
 
     function createMetricLabel(md, target, groupByTags, options) {
       if (target.alias) {
         var scopedVars = _.clone(options.scopedVars || {});
         _.each(md.tags, function(value, key) {
           scopedVars['tag_' + key] = {value: value};
-          if (key == 'carrier_code') {
+          if (key === 'carrier_code') {
             // fallback in case we did not find a mapping
-            var carrier_name = value;
-            if (value in carrier_code_2_name) {
-              carrier_name = carrier_code_2_name[value];
+            var carrierName = value;
+            if (value in carrierNames) {
+              carrierName = carrierNames[value];
             }
-            scopedVars['tag_f_carrier_name'] = {value: carrier_name};
+            scopedVars['tag_f_carrier_name'] = {value: carrierName};
           }
         });
         return templateSrv.replace(target.alias, scopedVars);
