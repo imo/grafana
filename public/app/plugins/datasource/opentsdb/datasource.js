@@ -2210,7 +2210,7 @@ function (angular, _, dateMath) {
             // fallback in case we did not find a mapping
             var carrier_name = value;
             if (value in carrier_code_2_name) {
-                carrier_name = carrier_code_2_name[value];
+              carrier_name = carrier_code_2_name[value];
             }
             scopedVars['tag_f_carrier_name'] = {value: carrier_name};
           }
