@@ -17,15 +17,15 @@ set -e
 grunt
 grunt release
 
-pushd tmp &> /dev/null
+pushd dist &> /dev/null
   echo -n "Enter full version (like 1.8.0-imo2): "
   read version
 
-  unzip *.zip
-  rm *.zip *.tar.gz
+  tar -xzf *.tar.gz
+  rm *.tar.gz
   mv grafana-* grafana-$version
   zip -r grafana-$version.zip grafana-$version
   rm -r grafana-$version
 popd &> /dev/null
 
-echo "Done! Check tmp/grafana-$version.zip"
+echo "Done! Check dist/grafana-$version.zip"
