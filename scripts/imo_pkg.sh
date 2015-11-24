@@ -23,7 +23,10 @@ pushd dist &> /dev/null
 
   tar -xzf *.tar.gz
   rm *.tar.gz
-  mv grafana-* grafana-$version
+  crnt=$(echo grafana-*)
+  if [ "$crnt" != "grafana-${version}" ]; then
+    mv $crnt grafana-$version
+  fi
   zip -r grafana-$version.zip grafana-$version
   rm -r grafana-$version
 popd &> /dev/null
