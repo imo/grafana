@@ -220,7 +220,7 @@ function (angular, $, kbn, _, moment) {
         date = moment(date);
       }
 
-      format = format || 'YYYY-MM-DD HH:mm:ss';
+      format = format || 'ddd, YYYY-MM-DD HH:mm:ss';
 
       return this.timezone === 'browser' ?
         moment(date).format(format) :
