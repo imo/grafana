@@ -353,7 +353,7 @@ define([
       });
 
       it('Should format timestamp with second resolution by default', function() {
-        expect(dashboard.formatDate(1234567890000)).to.be('2009-02-13 23:31:30');
+        expect(dashboard.formatDate(1234567890000)).to.be('Fri, 2009-02-13 23:31:30');
       });
 
       it('Should format timestamp with second resolution even if second format is passed as parameter', function() {
