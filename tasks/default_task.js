@@ -8,7 +8,7 @@ module.exports = function(grunt) {
     'concat:cssLight',
     'concat:cssFonts',
     'styleguide',
-    'sasslint',
+    // 'sasslint',
     'postcss'
     ]
   );
